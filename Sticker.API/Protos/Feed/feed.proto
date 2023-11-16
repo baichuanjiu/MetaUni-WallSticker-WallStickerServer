@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Sticker.API.Protos.Feed";
+
+package Feed;
+
+service AddFeed {
+  rpc AddFeedSingle (AddFeedSingleRequest) returns (GeneralReply);
+}
+
+message Cover
+{
+	string Type = 1;
+	string URL = 2;
+	double AspectRatio = 3;
+	optional string PreviewImage = 4;
+	optional int32 TimeTotal = 5;
+}
+
+message AddFeedSingleRequest {
+	optional Cover Cover = 1;
+	string PreviewContent = 2;
+	string Title = 3;
+	string Description = 4;
+	string OpenPageUrl = 5;
+}
+
+message GeneralReply {
+  int32 Code = 1; //状态码为0表示成功，其余均为失败
+  string Message = 2; //相关提示信息
+}

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sticker.API.Protos.BriefUserInfo";
+
+package briefUserInfo;
+
+service GetBriefUserInfo {
+  rpc GetBriefUserInfoSingle (GetBriefUserInfoSingleRequest) returns (GetBriefUserInfoSingleReply);
+  rpc GetBriefUserInfoList (GetBriefUserInfoListRequest)returns(GetBriefUserInfoListReply);
+  rpc GetBriefUserInfoMap (GetBriefUserInfoMapRequest)returns(GetBriefUserInfoMapReply);
+}
+
+message BriefUserInfo
+{
+  bool isValid = 1;
+  int32 UUID = 2;
+  string avatar = 3;
+  string nickname = 4;
+  string updatedTime = 5;
+}
+
+message GetBriefUserInfoSingleRequest {
+  int32 UUID = 1;
+}
+
+message GetBriefUserInfoSingleReply {
+  BriefUserInfo briefUserInfo = 1;
+}
+
+message GetBriefUserInfoListRequest {
+  repeated int32 queryList = 1;
+}
+
+message GetBriefUserInfoListReply {
+  repeated BriefUserInfo briefUserInfoList = 1;
+}
+
+message GetBriefUserInfoMapRequest {
+  repeated int32 queryList = 1;
+}
+
+message GetBriefUserInfoMapReply {
+  map<int32, BriefUserInfo> briefUserInfoMap = 1;
+}

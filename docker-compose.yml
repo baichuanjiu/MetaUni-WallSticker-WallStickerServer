@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  sticker.api:
+    image: ${DOCKER_REGISTRY-}stickerapi
+    build:
+      context: .
+      dockerfile: Sticker.API/Dockerfile
+    ports:
+      - 48864:80
+      - 48865:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Sticker.API.48864
+      Consul__Name: WallSticker.Sticker.API
+      Consul__IP: host.docker.internal
+      Consul__Port: 48864
+
+  sticker.api2:
+    image: ${DOCKER_REGISTRY-}stickerapi
+    build:
+      context: .
+      dockerfile: Sticker.API/Dockerfile
+    ports:
+      - 48866:80
+      - 48867:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Sticker.API.48866
+      Consul__Name: WallSticker.Sticker.API
+      Consul__IP: host.docker.internal
+      Consul__Port: 48866
+
+  hostedservice:
+    image: ${DOCKER_REGISTRY-}hostedservice
+    build:
+      context: .
+      dockerfile: HostedService/Dockerfile
+    environment:
+      TZ: Asia/Shanghai
+

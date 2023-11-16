@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Sticker.API.Protos.GeneralNotification";
+
+package generalNotification;
+
+service SendGeneralNotification {
+  rpc SendGeneralNotificationSingle (SendGeneralNotificationSingleRequest) returns (GeneralReply);
+}
+
+message Content
+{
+	string Key = 1;
+	string Value = 2;
+}
+
+message SendGeneralNotificationSingleRequest {
+  int32 UUID = 1;
+  string Title = 2;
+  string Description = 3;
+  repeated Content Contents = 4;
+  string MessageText = 5; //在Chat页显示的消息预览
+  optional string OpenPageUrl = 6; //未配置该项，则忽略OpenPageText
+  optional string OpenPageText = 7; //未配置该项，则默认值为“查看详情”
+}
+
+message GeneralReply {
+  int32 Code = 1; //状态码为0表示成功，其余均为失败
+  string Message = 2; //相关提示信息
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sticker.API.Protos.Authentication";
+
+package authentication;
+
+service Authenticate {
+  rpc AuthJWT (AuthJWTRequest) returns (AuthJWTReply);
+}
+
+message AuthJWTRequest {
+  int32 UUID = 1;
+  string JWT = 2;
+}
+
+message AuthJWTReply {
+  bool isValid = 1;
+}
